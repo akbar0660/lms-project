@@ -1,5 +1,7 @@
 package az.edu.turing.msauth.config;
 
+import az.edu.turing.msauth.util.JwtAuthEntryPoint;
+import az.edu.turing.msauth.util.JwtAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
