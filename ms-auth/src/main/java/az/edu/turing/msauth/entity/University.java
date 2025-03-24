@@ -1,10 +1,7 @@
 package az.edu.turing.msauth.entity;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
@@ -22,5 +19,9 @@ public class University {
     private String major;
     private int courseYear;
     private String educationLevel;
+
+    @ManyToOne
+    @JoinColumn(name="student_id", nullable=false)
+    private Student student;
 
 }
