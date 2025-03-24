@@ -2,6 +2,7 @@ package az.edu.turing.msauth.util;
 
 import az.edu.turing.msauth.entity.SuperAdmin;
 import az.edu.turing.msauth.entity.UserEntity;
+import az.edu.turing.msauth.model.enums.UserRole;
 import az.edu.turing.msauth.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
@@ -23,6 +24,7 @@ public class SuperAdminInitializer implements CommandLineRunner {
             UserEntity superAdmin = new SuperAdmin();
             superAdmin.setUsername("TuringSuperAdmin");
             superAdmin.setPassword(passwordEncoder.encode("TuringSuperAdmin"));
+            superAdmin.setRole(UserRole.SUPER_ADMIN);
 
             userRepository.save(superAdmin);
         }
