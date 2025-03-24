@@ -7,10 +7,9 @@ import lombok.*;
 import java.time.LocalDate;
 
 @Entity
-@DiscriminatorValue("TEACHER")
+@Table(name = "teachers")
 @Getter
 @Setter
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Teacher extends UserEntity {

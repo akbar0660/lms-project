@@ -1,0 +1,37 @@
+services:
+  postgres:
+    container_name: auth_postgres
+    image: postgres:latest
+    restart: unless-stopped
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: users_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: mysecretpassword
+    ports:
+      - "5433:5432"
+    networks:
+      - app_network
+
+  ms-auth:
+    build:
+      context: ./ms-auth
+      dockerfile: Dockerfile
+    depends_on:
+      - postgres
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/users_db
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: mysecretpassword
+    ports:
+      - "8080:8080"
+    networks:
+      - app_network
+
+volumes:
+  postgres_data:
+    driver: local
+networks:
+  app_network:
+    driver: bridge
