@@ -3,12 +3,13 @@ package az.edu.turing.msauth.model.request;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@SuperBuilder
 public class UserRequest {
 
     @NotNull
@@ -23,8 +24,5 @@ public class UserRequest {
 
     @NotNull
     private String phone;
-
-    @NotNull
-    private String username;
 
 }

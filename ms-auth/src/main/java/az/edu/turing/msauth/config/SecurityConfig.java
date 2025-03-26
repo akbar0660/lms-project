@@ -1,7 +1,9 @@
 package az.edu.turing.msauth.config;
 
+import az.edu.turing.msauth.filter.SuperAdminProfileFilter;
 import az.edu.turing.msauth.util.JwtAuthEntryPoint;
 import az.edu.turing.msauth.util.JwtAuthenticationFilter;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -17,15 +19,12 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig {
 
     private final JwtAuthEntryPoint authEntryPoint;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
-
-    public SecurityConfig(JwtAuthEntryPoint authEntryPoint, JwtAuthenticationFilter jwtAuthenticationFilter) {
-        this.authEntryPoint = authEntryPoint;
-        this.jwtAuthenticationFilter = jwtAuthenticationFilter;
-    }
+    private final SuperAdminProfileFilter superAdminProfileFilter;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -43,10 +42,12 @@ public class SecurityConfig {
                                 "/swagger-ui/**",
                                 "/v3/api-docs/**"
                         ).permitAll()
-                        .requestMatchers("/api/admin/").hasRole("ADMIN")
+                        .requestMatchers("/api/admin/complete-profile").hasRole("SUPER_ADMIN")
                         .anyRequest().authenticated()
                 )
-                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+                .addFilterAfter(superAdminProfileFilter, JwtAuthenticationFilter.class);
+
 
         return http.build();
     }

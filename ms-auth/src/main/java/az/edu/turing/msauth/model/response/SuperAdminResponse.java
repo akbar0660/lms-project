@@ -1,12 +1,12 @@
 package az.edu.turing.msauth.model.response;
 
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 @Getter
 @Setter
-@Builder
+@SuperBuilder
 @NoArgsConstructor
-@AllArgsConstructor
 public class SuperAdminResponse extends UserResponse {
 
 }
