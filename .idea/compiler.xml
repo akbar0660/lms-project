@@ -11,8 +11,5 @@
         <module name="ms-auth.main" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="ms-auth.test" target="21" />
-    </bytecodeTargetLevel>
   </component>
 </project>
