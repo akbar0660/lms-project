@@ -1,11 +1,12 @@
 package az.edu.turing.msauth.model.request;
 
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 @Getter
 @Setter
-@Builder
-@AllArgsConstructor
+@SuperBuilder
 @NoArgsConstructor
 public class SuperAdminRequest extends UserRequest {
+
 }

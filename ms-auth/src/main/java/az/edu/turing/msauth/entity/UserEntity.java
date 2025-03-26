@@ -38,6 +38,9 @@ public abstract class UserEntity implements UserDetails {
     @Enumerated(EnumType.STRING)
     private UserRole role;
 
+    @Column(nullable = false)
+    private boolean isProfileCompleted = true;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of();
