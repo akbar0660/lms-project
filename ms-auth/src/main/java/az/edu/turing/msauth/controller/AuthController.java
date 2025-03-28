@@ -2,38 +2,40 @@ package az.edu.turing.msauth.controller;
 
 import az.edu.turing.msauth.entity.SuperAdmin;
 import az.edu.turing.msauth.model.request.AuthRequest;
+import az.edu.turing.msauth.model.request.RefreshRequest;
 import az.edu.turing.msauth.model.response.AuthResponse;
+import az.edu.turing.msauth.model.response.RefreshResponse;
 import az.edu.turing.msauth.repository.UserRepository;
+import az.edu.turing.msauth.service.AuthService;
 import az.edu.turing.msauth.service.JwtService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.apache.coyote.Response;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/auth")
 @RequiredArgsConstructor
 public class AuthController {
 
-    private final UserRepository userRepository;
-    private final JwtService jwtService;
+    private final AuthService authService;
 
-    public AuthResponse authenticate(AuthRequest request) {
-        var user = userRepository.findByUsername(request.getUsername())
-                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+    @PostMapping("/login")
+    public ResponseEntity<AuthResponse> authenticate(@Valid @RequestBody AuthRequest request) {
 
-        boolean requiresCompletion = user instanceof SuperAdmin &&
-                !((SuperAdmin) user).isProfileCompleted();
+        return authService.login(request);
+    }
 
-        var jwtToken = jwtService.generateAccessToken(user);
-        var refreshToken = jwtService.generateRefreshToken(user);
+    @PostMapping("/logout")
+    public ResponseEntity<String> logout(@RequestHeader("Authorization") String authHeader) {
+        return authService.logout(authHeader);
+    }
 
-        return AuthResponse.builder()
-                .accessToken(jwtToken)
-                .refreshToken(refreshToken)
-                .requiresProfileCompletion(requiresCompletion)
-                .role(user.getRole())
-                .build();
+    @PostMapping("/refresh")
+    public ResponseEntity<RefreshResponse> refreshToken(@RequestBody RefreshRequest request) {
+        return authService.refreshAccessToken(request);
     }
 
 }
