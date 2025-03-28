@@ -6,6 +6,7 @@ spring:
     url: jdbc:postgresql://localhost:5432/user_db
     username: postgres
     password: mysecretpassword
+
   jpa:
     hibernate:
       ddl-auto: update
@@ -14,6 +15,24 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         format-sql: true
       show-sql: true
+
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      password: "mysecretpassword"
+      database: 0
+      timeout: 5000
+      jedis:
+        pool:
+          max-active: 8
+          max-idle: 4
+          min-idle: 1
+
+jwt:
+  secret: "202681513f5c0056e8d2aebe40362481fcb23949786c05db3936b8b72f936fdc"
+  access-token-expiration: 900000
+  refresh-token-expiration: 604800000
 
 server:
   port: 8081

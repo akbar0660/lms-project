@@ -12,13 +12,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1/admin/")
+@RequestMapping("/api/v1/admin")
 @RequiredArgsConstructor
 public class SuperAdminController {
 
     private final SuperAdminService service;
 
-    @PutMapping("/{username}")
+    @PutMapping("{username}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<AuthResponse> completeProfile(@PathVariable String username,
                                                         @Valid @RequestBody SuperAdminRequest request) {

@@ -7,11 +7,11 @@ import org.springframework.context.annotation.Configuration;
 @ConfigurationProperties(prefix = "jwt")
 public class JwtConfig {
 
+
     private String secret;
     private long accessTokenExpiration;
     private long refreshTokenExpiration;
 
-    // Getter ve Setter metodları
     public String getSecret() {
         return secret;
     }
