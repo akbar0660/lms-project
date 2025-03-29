@@ -4,6 +4,8 @@ package az.edu.turing.msauth.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -20,8 +22,7 @@ public class University {
     private int courseYear;
     private String educationLevel;
 
-    @ManyToOne
-    @JoinColumn(name="student_id", nullable=false)
-    private Student student;
+    @ManyToMany(mappedBy = "universities", fetch = FetchType.LAZY)
+    private List<Student> students;
 
 }
