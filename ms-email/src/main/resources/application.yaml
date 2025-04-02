@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: ms-email
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: rabbit
+    password: mysecretpassword
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ismayilzadetural712@gmail.com
+    password: rhlt ljls xgem qghl
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+server:
+    port: 8083
