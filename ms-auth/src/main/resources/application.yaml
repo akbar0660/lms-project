@@ -3,14 +3,21 @@ spring:
     name: ms-auth
 
 
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: rabbit
+    password: mysecretpassword
+
+
   datasource:
-    url: jdbc:postgresql://localhost:5432/users_db
+    url: jdbc:postgresql://localhost:5432/user_db
     username: postgres
     password: mysecretpassword
 
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect

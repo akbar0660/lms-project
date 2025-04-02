@@ -1,0 +1,24 @@
+spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: rabbit
+    password: mysecretpassword
+    listener:
+      simple:
+        prefetch: 1
+  datasource:
+    url: jdbc:postgresql://localhost:5432/notification_db
+    username: postgres
+    password: mysecretpassword
+    jpa:
+      hibernate:
+        ddl-auto: create
+      properties:
+        hibernate:
+          default_schema: public
+          dialect: org.hibernate.dialect.PostgreSQLDialect
+
+app:
+  queues:
+    notification: notification-queue
