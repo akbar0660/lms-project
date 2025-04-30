@@ -28,7 +28,7 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.Random;
-import java.util.UUID;
+
 
 @Service
 @RequiredArgsConstructor
@@ -41,7 +41,6 @@ public class AuthService {
     private final AuthEventProducer eventProducer;
     private final OtpRepository otpRepository;
     private final PasswordEncoder passwordEncoder;
-    private final StudentRepository studentRepository;
 
 
     public ResponseEntity<AuthResponse> login(AuthRequest request) {
@@ -49,7 +48,7 @@ public class AuthService {
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
         boolean requiresCompletion = user instanceof SuperAdmin &&
-                !((SuperAdmin) user).isProfileCompleted();
+                !user.isProfileCompleted();
 
         var jwtToken = jwtService.generateAccessToken(user);
         var refreshToken = jwtService.generateRefreshToken(user);
@@ -99,9 +98,6 @@ public class AuthService {
     public void forgotPassword(String email) {
         var user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-
-       /* Köhnə OTP-ləri təmizlə
-        otpRepository.deleteByUserEmailAndUsedFalse(email);*/
 
         String otpCode = String.format("%06d", new Random().nextInt(999999));
 
