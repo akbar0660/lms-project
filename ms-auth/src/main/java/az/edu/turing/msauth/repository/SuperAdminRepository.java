@@ -8,7 +8,6 @@ import java.util.Optional;
 
 @Repository
 public interface SuperAdminRepository extends JpaRepository<SuperAdmin, Integer> {
-    boolean existsByUsername(String username);
 
     Optional<SuperAdmin> findByUsername(String username);
 }

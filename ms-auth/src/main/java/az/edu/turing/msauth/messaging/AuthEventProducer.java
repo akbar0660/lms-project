@@ -16,7 +16,6 @@ import java.util.Map;
 public class AuthEventProducer {
     private final RabbitTemplate rabbitTemplate;
 
-    // OTP üçün
     public void sendOtpEvent(String email, String otpCode) {
         try {
             rabbitTemplate.convertAndSend(
