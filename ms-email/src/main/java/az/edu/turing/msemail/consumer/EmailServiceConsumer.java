@@ -1,13 +1,11 @@
 package az.edu.turing.msemail.consumer;
 
-import az.edu.turing.msemail.OtpEvent;
+import az.edu.turing.msemail.event.OtpEvent;
 import lombok.RequiredArgsConstructor;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Service;
-
-import java.util.Map;
 
 @Service
 @RequiredArgsConstructor

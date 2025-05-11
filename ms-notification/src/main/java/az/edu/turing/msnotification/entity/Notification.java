@@ -2,8 +2,7 @@ package az.edu.turing.msnotification.entity;
 
 import az.edu.turing.msnotification.model.enums.NotificationType;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
@@ -12,6 +11,9 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Table(name = "notifications")
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Notification {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
