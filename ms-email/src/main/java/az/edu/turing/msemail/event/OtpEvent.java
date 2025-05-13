@@ -1,4 +1,4 @@
-package az.edu.turing.msemail;
+package az.edu.turing.msemail.event;
 
 public record OtpEvent(
         String email,

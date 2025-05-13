@@ -11,19 +11,11 @@ spring:
     url: jdbc:postgresql://localhost:5432/notification_db
     username: postgres
     password: mysecretpassword
-    jpa:
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
       hibernate:
-        ddl-auto: create
-      properties:
-        hibernate:
-          default_schema: public
-          dialect: org.hibernate.dialect.PostgreSQLDialect
+        default_schema: public
+        dialect: org.hibernate.dialect.PostgreSQLDialect
 
-app:
-  queues:
-    notification: notification-queue
-
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka/

@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/api-gateway.main.iml" filepath="$PROJECT_DIR$/.idea/modules/api-gateway.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/eureka-server.main.iml" filepath="$PROJECT_DIR$/.idea/modules/eureka-server.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/lms-project.iml" filepath="$PROJECT_DIR$/lms-project.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/ms-auth.main.iml" filepath="$PROJECT_DIR$/.idea/modules/ms-auth.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ms-email.main.iml" filepath="$PROJECT_DIR$/.idea/modules/ms-email.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/ms-notification.main.iml" filepath="$PROJECT_DIR$/.idea/modules/ms-notification.main.iml" />
     </modules>
   </component>

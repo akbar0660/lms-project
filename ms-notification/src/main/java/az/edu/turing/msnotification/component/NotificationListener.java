@@ -7,7 +7,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Service;
 
-// NotificationListener.java
 @Service
 @RequiredArgsConstructor
 @Slf4j
