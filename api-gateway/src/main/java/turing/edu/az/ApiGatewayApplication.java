@@ -22,12 +22,12 @@ public class ApiGatewayApplication {
     public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
         return builder.routes()
                 .route("ms-auth", r -> r
-                        .path("/api/v1/auth/**")
-                        .uri("lb://AUTH-SERVICE"))
+                            .path("/api/v1/auth/**")
+                        .uri("lb://MS-AUTH"))
                 .route("ms-student", r -> r
                         .path("/api/v1/student/**")
                         .filters(f -> f.filter(jwtAuthenticationFilter.apply(new JwtAuthenticationFilter.Config()))) // This is where it might be causing the issue
-                        .uri("lb://USER-SERVICE"))
+                        .uri("lb://MS-STUDENT"))
                 .build();
     }
 }

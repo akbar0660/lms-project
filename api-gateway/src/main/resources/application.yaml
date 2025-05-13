@@ -5,6 +5,7 @@ spring:
   application:
     name: api-gateway
 
+
 eureka:
   client:
     service-url:
