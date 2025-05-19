@@ -12,17 +12,25 @@ import org.springframework.context.annotation.Configuration;
 public class RabbitMQConfig {
 
     public static final String EXCHANGE_NAME = "auth-exchange";
+
     public static final String OTP_QUEUE = "otp-queue";
+    public static final String STAFF_ATTENDANCE_NOTIFICATION_QUEUE = "staff.attendance.notification.queue";
 
     @Bean
-    public TopicExchange authExchange() {
-        return new TopicExchange(EXCHANGE_NAME);
+    public Queue staffAttendanceNotificationQueue() {
+        return new Queue(STAFF_ATTENDANCE_NOTIFICATION_QUEUE, true);
     }
 
     @Bean
     public Queue otpQueue() {
         return new Queue(OTP_QUEUE, true);
     }
+
+    @Bean
+    public TopicExchange authExchange() {
+        return new TopicExchange(EXCHANGE_NAME);
+    }
+
 
     @Bean
     public Binding otpBinding(Queue otpQueue, TopicExchange authExchange) {

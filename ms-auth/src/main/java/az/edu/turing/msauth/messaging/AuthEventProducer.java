@@ -36,4 +36,11 @@ public class AuthEventProducer {
                 email
         );
     }
+
+    public void sendStudentCreated(StudentCreatedEvent event) {
+        rabbitTemplate.convertAndSend(
+                "student.created.exchange",
+                "student.created",
+                 event);
+    }
 }

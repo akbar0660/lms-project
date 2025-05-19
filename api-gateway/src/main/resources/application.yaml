@@ -1,5 +1,5 @@
 server:
-  port: 8090
+  port: 8099
 
 spring:
   application:
@@ -21,3 +21,12 @@ management:
     web:
       exposure:
         include: "*"
+
+
+springdoc:
+  swagger-ui:
+    urls:
+      - name: ms-auth
+        url: /ms-auth/api-docs
+      - name: ms-student
+        url: /ms-student/v3/api-docs

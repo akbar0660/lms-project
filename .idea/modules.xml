@@ -8,6 +8,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/ms-auth.main.iml" filepath="$PROJECT_DIR$/.idea/modules/ms-auth.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/ms-email.main.iml" filepath="$PROJECT_DIR$/.idea/modules/ms-email.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/ms-notification.main.iml" filepath="$PROJECT_DIR$/.idea/modules/ms-notification.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ms-student.main.iml" filepath="$PROJECT_DIR$/.idea/modules/ms-student.main.iml" />
     </modules>
   </component>
 </project>

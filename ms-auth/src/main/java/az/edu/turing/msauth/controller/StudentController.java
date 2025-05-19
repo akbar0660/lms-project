@@ -1,9 +1,12 @@
 package az.edu.turing.msauth.controller;
 
 
-import az.edu.turing.msauth.entity.Student;
+import az.edu.turing.msauth.messaging.AuthEventProducer;
+import az.edu.turing.msauth.messaging.StudentCreatedEvent;
+import az.edu.turing.msauth.model.request.StudentProfileCreateRequest;
 import az.edu.turing.msauth.model.request.StudentRequest;
 import az.edu.turing.msauth.model.response.StudentResponse;
+import az.edu.turing.msauth.repository.StudentRepository;
 import az.edu.turing.msauth.service.StudentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +26,7 @@ public class StudentController {
     @PostMapping
     @PreAuthorize("hasRole('STAFF,SUPER_ADMIN')")
     public ResponseEntity<StudentResponse> createStudent(@RequestBody StudentRequest request) {
-
-        return studentService.createStudent(request);
+        StudentResponse student = studentService.createStudent(request);
+        return ResponseEntity.ok(student);
     }
 }

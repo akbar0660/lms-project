@@ -4,6 +4,8 @@ import az.edu.turing.msauth.entity.Student;
 import az.edu.turing.msauth.entity.University;
 import az.edu.turing.msauth.mapper.University.UniversityMapper;
 import az.edu.turing.msauth.mapper.student.StudentMapper;
+import az.edu.turing.msauth.messaging.AuthEventProducer;
+import az.edu.turing.msauth.messaging.StudentCreatedEvent;
 import az.edu.turing.msauth.model.enums.UserRole;
 import az.edu.turing.msauth.model.request.StudentRequest;
 import az.edu.turing.msauth.model.response.StudentResponse;
@@ -28,9 +30,10 @@ public class StudentService {
     private final StudentRepository studentRepository;
     private final StudentMapper studentMapper = StudentMapper.INSTANCE;
     private final UniversityMapper universityMapper = UniversityMapper.INSTANCE;
+    private final AuthEventProducer authEventProducer;
 
     @Transactional
-    public ResponseEntity<StudentResponse> createStudent(StudentRequest request) {
+    public StudentResponse createStudent(StudentRequest request) {
 
         Student student = new Student();
         student.setFirstName(request.getFirstName());
@@ -55,10 +58,19 @@ public class StudentService {
         Student savedStudent = studentRepository.save(student);
         List<String> universityNames = new ArrayList<>();
         savedStudent.getUniversities().forEach(university -> universityNames.add(university.getUniversityName()));
-        return ResponseEntity.ok().body(StudentResponse.builder()
+
+        StudentCreatedEvent event = new StudentCreatedEvent();
+        event.setStudentId(savedStudent.getId());
+        event.setName(savedStudent.getFirstName());
+        event.setUsername(savedStudent.getUsername());
+        authEventProducer.sendStudentCreated(event);
+
+        return StudentResponse.builder()
+                .id(savedStudent.getId())
                 .firstName(savedStudent.getFirstName())
                 .lastName(savedStudent.getLastName())
-                .universityNames(universityNames).build());
+                .universityNames(universityNames).build();
 
     }
+
 }

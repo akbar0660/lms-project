@@ -16,10 +16,15 @@ import java.util.List;
 public class NotificationController {
     private final NotificationService notificationService;
 
-    @GetMapping
-    public List<Notification> getUserNotifications(
-            @RequestParam String email
-    ) {
-        return notificationService.getUserNotifications(email);
+    @GetMapping("/by-email")
+    public List<Notification> getUserNotificationsByEmail(
+            @RequestParam String email) {
+        return notificationService.getUserNotificationsViaMail(email);
+    }
+
+    @GetMapping("/by-username")
+    public List<Notification> getUserNotificationsByUsername(
+            @RequestParam String username) {
+        return notificationService.getUserNotificationsViaUsername(username);
     }
 }

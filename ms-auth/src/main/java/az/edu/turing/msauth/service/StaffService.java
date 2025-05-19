@@ -14,6 +14,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -42,5 +44,12 @@ public class StaffService {
                 .fromCurrentRequest().build().toUri();
 
         return ResponseEntity.created(location).body(staffMapper.entityToResponse(staffRepository.save(staff)));
+    }
+
+    public List<String> getAllStaffEmails() {
+        return staffRepository.findAll()
+                .stream()
+                .map(Staff::getEmail)
+                .collect(Collectors.toList());
     }
 }

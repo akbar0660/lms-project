@@ -14,6 +14,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -26,11 +27,21 @@ public class JwtService {
     }
 
     public String generateAccessToken(UserDetails userDetails) {
-        return buildToken(new HashMap<>(), userDetails, jwtConfig.getAccessTokenExpiration());
+        Map<String, Object> extraClaims = new HashMap<>();
+        String roles = userDetails.getAuthorities().stream()
+                .map(a -> a.getAuthority().replace("ROLE_", "")) // "ROLE_STUDENT" → "STUDENT"
+                .collect(Collectors.joining(","));
+        extraClaims.put("roles", roles);
+        return buildToken(extraClaims, userDetails, jwtConfig.getAccessTokenExpiration());
     }
 
     public String generateRefreshToken(UserDetails userDetails) {
-        return buildToken(new HashMap<>(), userDetails, jwtConfig.getRefreshTokenExpiration());
+        Map<String, Object> extraClaims = new HashMap<>();
+        String roles = userDetails.getAuthorities().stream()
+                .map(a -> a.getAuthority().replace("ROLE_", "")) // "ROLE_STUDENT" → "STUDENT"
+                .collect(Collectors.joining(","));
+        extraClaims.put("roles", roles);
+        return buildToken(extraClaims, userDetails, jwtConfig.getRefreshTokenExpiration());
     }
 
     private String buildToken(Map<String, Object> extraClaims, UserDetails userDetails, long expiration) {

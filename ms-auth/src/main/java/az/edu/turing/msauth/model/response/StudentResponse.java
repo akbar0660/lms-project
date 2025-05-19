@@ -11,7 +11,7 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 public class StudentResponse {
-
+    private Long id;
     private String firstName;
     private String lastName;
     private List<String> universityNames;

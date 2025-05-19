@@ -20,6 +20,10 @@ public class Notification {
     private Long id;
     private String email;
     private String message;
+    private String name;
+    private String username;
+
+
 
     @Enumerated(EnumType.STRING)
     private NotificationType type;

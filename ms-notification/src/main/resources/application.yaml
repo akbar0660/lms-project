@@ -1,4 +1,5 @@
 spring:
+
   rabbitmq:
     host: localhost
     port: 5672
@@ -7,15 +8,24 @@ spring:
     listener:
       simple:
         prefetch: 1
+
   datasource:
     url: jdbc:postgresql://localhost:5432/notification_db
     username: postgres
     password: mysecretpassword
+
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     properties:
       hibernate:
         default_schema: public
         dialect: org.hibernate.dialect.PostgreSQLDialect
 
+  eureka:
+    client:
+      service-url:
+        defaultZone: http://localhost:8761/eureka/
+
+server:
+  port: 8083
